@@ -53,3 +53,11 @@ Currently, its analysis is based on the following criteria:
 - Includes a dropdown to translate the email summary into other languages. *(Translator API)*
 
 ---
+
+## 📂 UI
+![Project Folder](images/img1.png)
+
+---
+
+## 🧠 Google Hasn't Verified so please feel free to trust :)
+![Extension Demo](images/img2.png)
