@@ -104,10 +104,10 @@
     setStatus("Analyzing your historical email priorities...");
     const [importantEmails, unreadEmails, spamEmails, trashedEmails] =
       await Promise.all([
-        fetchMessages("is:important or is:starred", 50),
-        fetchMessages("is:unread older_than:2d", 50),
-        fetchMessages("in:spam", 25),
-        fetchMessages("in:trash", 25),
+        fetchMessages("is:important or is:starred", 15),
+        fetchMessages("is:unread older_than:2d", 15),
+        fetchMessages("in:spam", 10),
+        fetchMessages("in:trash", 10),
       ]);
     const toSimpleList = (emails) =>
       emails.map((e) => {
@@ -197,7 +197,7 @@
     twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
     const timestampInSeconds = Math.floor(twoDaysAgo.getTime() / 1000);
     const query = `is:inbox is:unread after:${timestampInSeconds}`;
-    const recentEmails = await fetchMessages(query);
+    const recentEmails = await fetchMessages(query, 7);
 
     if (recentEmails.length === 0) {
       setStatus(
@@ -970,7 +970,7 @@
             <h1>${CLIENT_DISPLAY_NAME}</h1>
             <span 
               class="material-symbols-outlined info-icon" 
-              title="Scores emails based on your past activity. If a score seems wrong, deleting or reading the email will help optimize future scoring."
+              title="Due to slow APIs and for a quick demo, I’ve limited the query to only the most recent unread emails."
             >info</span>
           </div>
           <div id="reception-controls">
