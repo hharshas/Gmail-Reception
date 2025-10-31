@@ -105,7 +105,7 @@
     const [importantEmails, unreadEmails, spamEmails, trashedEmails] =
       await Promise.all([
         fetchMessages("is:important or is:starred", 50),
-        fetchMessages("is:unread older_than:4d", 50),
+        fetchMessages("is:unread older_than:2d", 50),
         fetchMessages("in:spam", 25),
         fetchMessages("in:trash", 25),
       ]);
@@ -193,15 +193,15 @@
     if (!state.aiSession) throw new Error("AI session not available.");
     setStatus("Fetching recent unread emails...");
 
-    const fourDaysAgo = new Date();
-    fourDaysAgo.setDate(fourDaysAgo.getDate() - 4);
-    const timestampInSeconds = Math.floor(fourDaysAgo.getTime() / 1000);
+    const twoDaysAgo = new Date();
+    twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+    const timestampInSeconds = Math.floor(twoDaysAgo.getTime() / 1000);
     const query = `is:inbox is:unread after:${timestampInSeconds}`;
     const recentEmails = await fetchMessages(query);
 
     if (recentEmails.length === 0) {
       setStatus(
-        "No unread emails in the last 4 days. You're all caught up! 🎉"
+        "No unread emails in the last 2 days. You're all caught up! 🎉"
       );
       onBatchProcessed([]);
       return;
